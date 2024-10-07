@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -26,9 +27,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-200 text-gray-900 p-8`}>
+        <header className="p-8 bg-slate-50 rounded-xl mb-4">
+          <p>Header</p>
+          <Link href="/">Go to Homepage</Link>
+        </header>
         {children}
+        <footer className="p-8 bg-slate-50 rounded-xl mb-4">
+          <p>Footer</p>
+        </footer>
       </body>
     </html>
   );
