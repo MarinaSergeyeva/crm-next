@@ -26,6 +26,14 @@ export default function Sidebar() {
             }`}>
             <Link href="/staff">Staff</Link>
           </li>
+          <li
+            className={`py-4 px-8 mb-4 link ${
+              pathname === "/payroll"
+                ? "bg-slate-100 border-l-4 border-blue-500"
+                : ""
+            }`}>
+            <Link href="/payroll">Payroll</Link>
+          </li>
         </ul>
       </nav>
     </div>
