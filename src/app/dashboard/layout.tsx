@@ -1,14 +1,7 @@
-import Sidebar from "@/src/components/Sidebar/page";
-
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div className="flex mb-4">
-      <Sidebar />
-      {children}
-    </div>
-  );
+  return <div className="flex mb-4 p-4">{children}</div>;
 }
