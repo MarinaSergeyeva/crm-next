@@ -9,12 +9,22 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { items } from "./menu-items";
+import Image from "next/image";
 
 export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <p>Logo</p>
+        <div className="my-10 mx-auto">
+          <Image
+            src="/images/logo.svg"
+            alt="Logo"
+            width={30}
+            height={30}
+            className="mx-auto mb-2"
+          />
+          <p>ERP System</p>
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
