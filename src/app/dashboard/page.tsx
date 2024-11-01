@@ -1,15 +1,18 @@
 import Image from "next/image";
-import { ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
+import ContentBlock from "@/components/custom/ContentBlock";
+import { memoDummyData, staffDummyData, vouchersDummyData } from "../dummyData";
+import { StaffApplicationCard } from "@/components/custom/StaffApplicationCard";
 
 export default function Dashboard() {
   return (
     <>
       <div className="flex justify-between space-x-6 mb-6">
-        <div className="p-6 bg-white rounded-xl w-1/4">
+        <ContentBlock>
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="font-extrabold text-3xl mb-2">250</h2>
-              <p className="mb-4">Total number of staff</p>
+              <h2 className="font-extrabold text-xl mb-2">250</h2>
+              <p className="mb-4 text-base">Total number of staff</p>
             </div>
             <Image
               src="/images/icon-staff.svg"
@@ -24,20 +27,42 @@ export default function Dashboard() {
               size={16}
               className="mx-2"
             />
-            <p>12 more than last quarter</p>
+            <p className="text-xs">12 more than last quarter</p>
           </div>
-        </div>
-        <div className="p-6 bg-white rounded-xl w-1/4">
+        </ContentBlock>
+        <ContentBlock>
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="font-extrabold text-3xl mb-2">250</h2>
-              <p className="mb-4">Total number of staff</p>
+              <h2 className="font-extrabold text-xl mb-2">100</h2>
+              <p className="mb-4 text-base">Total application</p>
             </div>
             <Image
-              src="/images/icon-staff.svg"
+              src="/images/icon-files.svg"
               width={50}
               height={50}
-              alt="Staff icon"
+              alt="Application icon"
+            />
+          </div>
+          <div className="flex flex-row items-center">
+            <ArrowDown
+              color="red"
+              size={16}
+              className="mx-2"
+            />
+            <p className="text-xs">0.2% lover than last quarter</p>
+          </div>
+        </ContentBlock>
+        <ContentBlock>
+          <div className="flex justify-between items-start">
+            <div>
+              <h2 className="font-extrabold text-xl mb-2">10</h2>
+              <p className="mb-4 text-base">Total projects</p>
+            </div>
+            <Image
+              src="/images/icon-rocket.svg"
+              width={50}
+              height={50}
+              alt="Projects icon"
             />
           </div>
           <div className="flex flex-row items-center">
@@ -46,77 +71,113 @@ export default function Dashboard() {
               size={16}
               className="mx-2"
             />
-            <p>12 more than last quarter</p>
+            <p className="text-xs">2% more than last quarter</p>
           </div>
-        </div>
-        <div className="p-6 bg-white rounded-xl w-1/4">
+        </ContentBlock>
+        <ContentBlock>
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="font-extrabold text-3xl mb-2">250</h2>
-              <p className="mb-4">Total number of staff</p>
+              <h2 className="font-extrabold text-xl mb-2">10</h2>
+              <p className="mb-4 text-base">Total departments</p>
             </div>
             <Image
-              src="/images/icon-staff.svg"
+              src="/images/icon-hierarchy.svg"
               width={50}
               height={50}
               alt="Staff icon"
             />
           </div>
-          <div className="flex flex-row items-center">
-            <ArrowUp
-              color="green"
-              size={16}
-              className="mx-2"
-            />
-            <p>12 more than last quarter</p>
+        </ContentBlock>
+      </div>
+      <div className="flex space-x-6 mb-6">
+        <ContentBlock width="w-1/2">
+          <h2 className="font-extrabold text-xl mb-6">Memo</h2>
+          <div className="flex justify-between mb-4 pb-2">
+            <p className="text-xs font-bold w-1/12">S/N</p>
+            <p className="text-xs font-bold w-3/12">Memo Title</p>
+            <p className="text-xs font-bold w-3/12">Sent From</p>
+            <p className="text-xs font-bold w-3/12">Sent To</p>
+            <p className="text-xs font-bold w-2/12">Status</p>
           </div>
-        </div>
-        <div className="p-6 bg-white rounded-xl w-1/4">
-          <div className="flex justify-between items-start">
-            <div>
-              <h2 className="font-extrabold text-3xl mb-2">250</h2>
-              <p className="mb-4">Total number of staff</p>
+          {memoDummyData.map((item, index) => (
+            <div
+              key={index}
+              className="flex justify-between border-b border-gray-100 pb-2 mb-2">
+              <p className="text-xs w-1/12">
+                {index < 9 ? `0${index + 1}` : index + 1}
+              </p>
+              <p className="text-xs w-3/12">{item.memoTitle}</p>
+              <p className="text-xs w-3/12">{item.sentFrom}</p>
+              <p className="text-xs w-3/12">{item.sentTo}</p>
+              <p
+                className={`text-xs w-2/12 ${
+                  item.status === "Pending"
+                    ? "text-orange-400"
+                    : "text-green-600"
+                }`}>
+                {item.status}
+              </p>
             </div>
-            <Image
-              src="/images/icon-staff.svg"
-              width={50}
-              height={50}
-              alt="Staff icon"
-            />
+          ))}
+        </ContentBlock>
+        <ContentBlock width="w-1/2">
+          <h2 className="font-extrabold text-xl mb-6">Staff List</h2>
+          <div className="flex justify-between mb-4 pb-2">
+            <p className="text-xs font-bold w-1/12">S/N</p>
+            <p className="text-xs font-bold w-4/12">Staff Name</p>
+            <p className="text-xs font-bold w-4/12">Staff Role</p>
+            <p className="text-xs font-bold w-3/12">Designation</p>
           </div>
-          <div className="flex flex-row items-center">
-            <ArrowUp
-              color="green"
-              size={16}
-              className="mx-2"
-            />
-            <p>12 more than last quarter</p>
-          </div>
-        </div>
+          {staffDummyData.map((item, index) => (
+            <div
+              key={index}
+              className="flex justify-between border-b border-gray-100 pb-2 mb-2">
+              <p className="text-xs w-1/12">
+                {index < 9 ? `0${index + 1}` : index + 1}
+              </p>
+              <p className="text-xs w-4/12">{item.staffName}</p>
+              <p className="text-xs w-4/12">{item.staffRole}</p>
+              <p className="text-xs w-3/12">{item.designation}</p>
+            </div>
+          ))}
+        </ContentBlock>
       </div>
       <div className="flex space-x-6">
-        <div className="p-6 bg-white rounded-xl w-1/2">
-          <h2 className="font-extrabold text-3xl mb-2">Memo</h2>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis
-            dolores nesciunt amet nisi aut distinctio maiores quia quidem
-            dignissimos, non libero maxime, aliquid ipsum laboriosam labore nemo
-            aliquam recusandae ratione sit in esse omnis inventore hic nulla.
-            Ad, accusantium consequuntur dolorum voluptate iure quam quos
-            maiores impedit, cum temporibus minus?
-          </p>
-        </div>
-        <div className="p-6 bg-white rounded-xl w-1/2">
-          <h2 className="font-extrabold text-3xl mb-2">Staff List</h2>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis
-            dolores nesciunt amet nisi aut distinctio maiores quia quidem
-            dignissimos, non libero maxime, aliquid ipsum laboriosam labore nemo
-            aliquam recusandae ratione sit in esse omnis inventore hic nulla.
-            Ad, accusantium consequuntur dolorum voluptate iure quam quos
-            maiores impedit, cum temporibus minus?
-          </p>
-        </div>
+        <ContentBlock width="w-1/2">
+          <h2 className="font-extrabold text-xl mb-6">Payment Vouchers</h2>
+          <div className="flex justify-between mb-4 pb-2">
+            <p className="text-xs font-bold w-1/12">S/N</p>
+            <p className="text-xs font-bold w-5/12">Subject</p>
+            <p className="text-xs font-bold w-3/12">Date</p>
+            <p className="text-xs font-bold w-3/12">Status</p>
+          </div>
+          {vouchersDummyData.map((item, index) => (
+            <div
+              key={index}
+              className="flex justify-between border-b border-gray-100 pb-2 mb-2">
+              <p className="text-xs w-1/12">
+                {index < 9 ? `0${index + 1}` : index + 1}
+              </p>
+              <p className="text-xs w-5/12">{item.subject}</p>
+              <p className="text-xs w-3/12">{item.date}</p>
+              <p
+                className={`text-xs w-3/12 ${
+                  item.status === "Pending"
+                    ? "text-orange-400"
+                    : "text-green-600"
+                }`}>
+                {item.status}
+              </p>
+            </div>
+          ))}
+        </ContentBlock>
+        <ContentBlock width="w-1/2">
+          <h2 className="font-extrabold text-xl mb-6">
+            Staff Applications Card
+          </h2>
+          
+          <StaffApplicationCard />
+        </ContentBlock>
       </div>
     </>
   );
