@@ -3,10 +3,14 @@ import { ArrowDown, ArrowUp } from "lucide-react";
 import ContentBlock from "@/components/custom/ContentBlock";
 import { memoDummyData, staffDummyData, vouchersDummyData } from "../dummyData";
 import { StaffApplicationCard } from "@/components/custom/StaffApplicationCard";
+import prisma from "../../lib/prisma";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const staff = await prisma.staff.findMany();
+
   return (
     <>
+      {console.log("staff", staff)}
       <div className="flex justify-between space-x-6 mb-6">
         <ContentBlock>
           <div className="flex justify-between items-start">
@@ -94,7 +98,7 @@ export default function Dashboard() {
           <h2 className="font-extrabold text-xl mb-6">Memo</h2>
           <div className="flex justify-between mb-4 pb-2">
             <p className="text-xs font-bold w-1/12">S/N</p>
-            <p className="text-xs font-bold w-3/12">Memo Title</p>
+            <p className="texts-xs font-bold w-3/12">Memo Title</p>
             <p className="text-xs font-bold w-3/12">Sent From</p>
             <p className="text-xs font-bold w-3/12">Sent To</p>
             <p className="text-xs font-bold w-2/12">Status</p>
@@ -120,24 +124,28 @@ export default function Dashboard() {
             </div>
           ))}
         </ContentBlock>
-        <ContentBlock width="w-1/2">
+        <ContentBlock
+          width="w-1/2"
+          className="max-h-96">
           <h2 className="font-extrabold text-xl mb-6">Staff List</h2>
           <div className="flex justify-between mb-4 pb-2">
             <p className="text-xs font-bold w-1/12">S/N</p>
             <p className="text-xs font-bold w-4/12">Staff Name</p>
             <p className="text-xs font-bold w-4/12">Staff Role</p>
-            <p className="text-xs font-bold w-3/12">Designation</p>
+            <p className="text-xs font-bold w-3/12">Position</p>
           </div>
-          {staffDummyData.map((item, index) => (
+          {staff.map((item, index) => (
             <div
-              key={index}
+              key={item.id}
               className="flex justify-between border-b border-gray-100 pb-2 mb-2">
               <p className="text-xs w-1/12">
                 {index < 9 ? `0${index + 1}` : index + 1}
               </p>
-              <p className="text-xs w-4/12">{item.staffName}</p>
-              <p className="text-xs w-4/12">{item.staffRole}</p>
-              <p className="text-xs w-3/12">{item.designation}</p>
+              <p className="text-xs w-4/12">
+                {item.firstName} {item.lastName}
+              </p>
+              <p className="text-xs w-4/12">{item.role}</p>
+              <p className="text-xs w-3/12">{item.position}</p>
             </div>
           ))}
         </ContentBlock>
@@ -175,7 +183,7 @@ export default function Dashboard() {
           <h2 className="font-extrabold text-xl mb-6">
             Staff Applications Card
           </h2>
-          
+
           <StaffApplicationCard />
         </ContentBlock>
       </div>
